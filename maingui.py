@@ -46,11 +46,15 @@ class Window(QWidget):
 
 
     def setIcon(self):
+        """Sets the Gui Icon to the calculator image
+        """
         appIcon = QIcon("icons/icon.png")
         self.setWindowIcon(appIcon)
 
 
     def quiteApp(self):
+        """The response of the quit button, exits program
+        """
         userInfo = QMessageBox.question(self, "Confirmation", "Do you want to quit ?",
                                         QMessageBox.Yes | QMessageBox.No)
 
@@ -60,12 +64,23 @@ class Window(QWidget):
                 pass
     
     def center(self):
+        """Lets the gui start exactly in the middle of the screen
+        """
         qRect = self.frameGeometry()
         centerPoint = QDesktopWidget().availableGeometry().center()
         qRect.moveCenter(centerPoint)
         self.move(qRect.topLeft())
  
     def plt_graph_widget(self, xaxis, yaxis):
+        """plots the arguments in using matplotlib + it's toolbar
+
+        Args:
+            xaxis (_type_): _description_
+            yaxis (_type_): _description_
+
+        Returns:
+            QWidget: with a QVBoxLayout, matplotlib toolbar at the top and the graph beneath 
+        """
         gw = self.graph
         gw.axes.plot(xaxis, yaxis)
 
@@ -83,15 +98,22 @@ class Window(QWidget):
 
 
     def update_plot(self):
-        self.graph.axes.cla()  # Clear the canvas.
+        """Response to the evaluate button, updates xaxis and yaxis data
+        """
+        self.graph.axes.cla()  # Clear the graph.
         self.xdata = self.nxdata
         self.ydata = self.nydata
         self.graph.axes.plot(self.xdata, self.ydata, 'r')
-        # Trigger the canvas to update and redraw.
+        # Trigger the graph to update and redraw.
         self.graph.draw()
 
 
     def make_evaluate_button(self):
+        """Makes the evaluation button and connects it with the signal
+
+        Returns:
+            QPushButton: Button with specific Configurations
+        """
         button = QPushButton("Evaluate")
         button.setIcon(QIcon("icons/calc.png"))
         button.setMinimumHeight(40)
@@ -101,6 +123,11 @@ class Window(QWidget):
 
 
     def make_quit_button(self):
+        """Makes the quit button and connects it with the signal
+
+        Returns:
+            QPushButton: Button with specific Configurations
+        """
         quitbutton = QPushButton("Quit", self)
         quitbutton.setIcon(QIcon("icons/quit2.png"))
         quitbutton.setToolTip("Unfortunately quits the program 😞")
@@ -108,6 +135,15 @@ class Window(QWidget):
         return quitbutton
 
     def createLayout(self):
+        """Makes the main layout of the Window
+
+        Long Description:
+            Puts buttons in an hbox
+            puts graph and the hbox in a vbox layout
+
+        Returns:
+            QPushButton: Button with specific Configurations
+        """
         self.groupBox = QGroupBox("Enter Your Equation: ")
         self.groupBox.setFont(QFont("Decorative", 15))
         groupBoxHorizontal = QGroupBox()
@@ -127,6 +163,7 @@ class Window(QWidget):
         vbox.addWidget(groupBoxHorizontal)
         self.groupBox.setLayout(vbox)
 
+# Calling the Program
 myApp = QApplication(sys.argv)
 window = Window()
 window.show()
