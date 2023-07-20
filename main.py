@@ -30,11 +30,11 @@ r = int(input())+1
 validate_min_max(l, r)
 
 
+# arrays to be plotted as x-axis and y-axis
 xpoints = np.arange(l,r)
 ypoints = np.zeros(r-l)
 
-print(int(xpoints.size))
-print(int(ypoints.size))
+
 
 for i in range(l, r):
     ypoints[i-l] = F(i)
@@ -42,8 +42,5 @@ for i in range(l, r):
 plt.plot(xpoints, ypoints)
 plt.show()
 
-# plot
-# for i in range(l, r):
-#     Y = F(i)
-#     print("@ X = " + str(i) + " Y = " + str(Y));
+
 
