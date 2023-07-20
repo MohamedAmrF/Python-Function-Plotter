@@ -5,7 +5,7 @@ import numpy as np
 import random
 plt.use('Qt5Agg')
 
-from PySide2.QtWidgets import QApplication,QWidget,QLabel,QToolTip,QPushButton,QMessageBox, QDesktopWidget,QMainWindow,QDialog,QHBoxLayout,QVBoxLayout,QGroupBox
+from PySide2.QtWidgets import QApplication,QWidget,QLabel,QToolTip,QPushButton,QMessageBox, QDesktopWidget,QMainWindow,QDialog,QHBoxLayout,QVBoxLayout,QGroupBox,QLineEdit
 from PySide2.QtGui import QIcon,QPixmap,QFont
 from PySide2.QtCore import QTimer
 
@@ -134,6 +134,34 @@ class Window(QWidget):
         quitbutton.clicked.connect(self.quiteApp)
         return quitbutton
 
+    def make_fx_textbox(self):
+        groupBox = QGroupBox()
+        hbox = QHBoxLayout()
+        line = QLineEdit(self)
+        label = QLabel(self)
+        label.setText("Fx: ")
+        hbox.addWidget(label)
+        hbox.addWidget(line)
+        groupBox.setLayout(hbox)
+        return groupBox
+
+    def make_range_boxes(self):
+        groupBox = QGroupBox()
+        hbox = QHBoxLayout()
+        linemin = QLineEdit(self)
+        labelmin = QLabel(self)
+        labelmin.setText("Min: ")
+        hbox.addWidget(labelmin)
+        hbox.addWidget(linemin)
+
+        linemax = QLineEdit(self)
+        labelmax = QLabel(self)
+        labelmax.setText("Max: ")
+        hbox.addWidget(labelmax)
+        hbox.addWidget(linemax)
+        groupBox.setLayout(hbox)
+        return groupBox
+
     def createLayout(self):
         """Makes the main layout of the Window
 
@@ -158,7 +186,11 @@ class Window(QWidget):
         groupBoxHorizontal.setLayout(hbox)
 
         # V box
+        text_box = self.make_fx_textbox()
+        range_boxes = self.make_range_boxes()
         canvas = self.plt_graph_widget([0], [0])    
+        vbox.addWidget(text_box)
+        vbox.addWidget(range_boxes)
         vbox.addWidget(canvas)
         vbox.addWidget(groupBoxHorizontal)
         self.groupBox.setLayout(vbox)
