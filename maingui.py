@@ -24,6 +24,9 @@ class MplCanvas(FigureCanvasQTAgg):
 class Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.linefx = ""
+        self.linemin = ""
+        self.linemax = ""
         self.min = 1
         self.max = 1
         self.graph = MplCanvas(self, width=5, height=5, dpi=100)
@@ -137,30 +140,40 @@ class Window(QWidget):
     def make_fx_textbox(self):
         groupBox = QGroupBox()
         hbox = QHBoxLayout()
-        line = QLineEdit(self)
-        label = QLabel(self)
-        label.setText("Fx: ")
-        hbox.addWidget(label)
-        hbox.addWidget(line)
+        self.linefx = QLineEdit(self)
+        labelfx = QLabel(self)
+        labelfx.setText("Fx: ")
+        hbox.addWidget(labelfx)
+        hbox.addWidget(self.linefx)
         groupBox.setLayout(hbox)
         return groupBox
 
     def make_range_boxes(self):
         groupBox = QGroupBox()
         hbox = QHBoxLayout()
-        linemin = QLineEdit(self)
+        self.linemin = QLineEdit(self)
         labelmin = QLabel(self)
         labelmin.setText("Min: ")
         hbox.addWidget(labelmin)
-        hbox.addWidget(linemin)
+        hbox.addWidget(self.linemin)
 
-        linemax = QLineEdit(self)
+        self.linemax = QLineEdit(self)
         labelmax = QLabel(self)
         labelmax.setText("Max: ")
         hbox.addWidget(labelmax)
-        hbox.addWidget(linemax)
+        hbox.addWidget(self.linemax)
         groupBox.setLayout(hbox)
         return groupBox
+
+
+    def read_fx(self):
+        return self.linefx.text()
+    
+    def read_min(self):
+        return self.linemin.text()
+
+    def read_max(self):
+        return self.linemax.text()
 
     def createLayout(self):
         """Makes the main layout of the Window
