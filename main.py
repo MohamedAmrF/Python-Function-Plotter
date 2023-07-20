@@ -10,11 +10,7 @@ def F(X):
 
 equation = input("Enter the Equation to be solved: ")
 equation = fix_equation(equation)
-print(equation)
-
-while input_validation(equation) == False:
-    equation = input("Invalid Syntax, Enter The equation again: ")
-    equation = fix_equation(equation)
+validate(equation)
 
 
 print("Enter the Minimum: ")

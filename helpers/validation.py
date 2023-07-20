@@ -7,6 +7,11 @@ def validate_min_max(l, r):
         l = int(input("Enter Minimum: "))
         r = int(input("Enter Maximum: "))+1
 
+def validate(input_equation):
+    while input_validation(input_equation) == False:
+        input_equation = input("Invalid Syntax, Enter The equation again: ")
+        input_equation = fix_equation(input_equation)
+
 def valid_character(c):
     validCharacters = "x+-*/^ 0123456789()"
     if validCharacters.find(c) == -1:
