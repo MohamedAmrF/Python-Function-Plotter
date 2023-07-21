@@ -2,10 +2,9 @@ import math
 import ast
 
 def validate_min_max(l, r):
-    while r <= l:
-        print("INVALID: The maximum must be greater than minimum")
-        l = int(input("Enter Minimum: "))
-        r = int(input("Enter Maximum: "))+1
+    if r <= l:
+        return False
+    return True
 
 def validate(input_equation):
     while input_validation(input_equation) == False:
@@ -36,3 +35,15 @@ def fix_equation(input_equation):
     input_equation = input_equation.replace("^", "**")
     input_equation = input_equation.replace("X", "x")
     return input_equation
+
+def F(X, equation):
+    """Takes X and returns F(x)
+
+    Args:
+        X (float): input value to the equation (x)
+
+    Returns:
+        float: Output of the function after evaluation (F(x))
+    """
+    x = X
+    return eval(equation)

@@ -12,6 +12,7 @@ from PySide2.QtCore import QTimer
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 
+from helpers.validation import *
 
 class MplCanvas(FigureCanvasQTAgg):
     """class for matplotlib graphs
@@ -24,9 +25,6 @@ class MplCanvas(FigureCanvasQTAgg):
 class Window(QWidget):
     def __init__(self):
         super().__init__()
-        self.linefx = ""
-        self.linemin = ""
-        self.linemax = ""
         self.min = 1
         self.max = 1
         self.graph = MplCanvas(self, width=5, height=5, dpi=100)
@@ -45,6 +43,7 @@ class Window(QWidget):
         vbox = QVBoxLayout()
         vbox.addWidget(self.groupBox)
         self.setLayout(vbox)
+
 
 
 
@@ -104,8 +103,8 @@ class Window(QWidget):
         """Response to the evaluate button, updates xaxis and yaxis data
         """
         self.graph.axes.cla()  # Clear the graph.
-        self.xdata = self.nxdata
-        self.ydata = self.nydata
+        # self.xdata = self.nxdata
+        # self.ydata = self.nydata
         self.graph.axes.plot(self.xdata, self.ydata, 'r')
         # Trigger the graph to update and redraw.
         self.graph.draw()
@@ -121,7 +120,7 @@ class Window(QWidget):
         button.setIcon(QIcon("icons/calc.png"))
         button.setMinimumHeight(40)
         button.setToolTip("Plots your function 🙄")
-        button.clicked.connect(self.update_plot)
+        button.clicked.connect(self.application)
         return button
 
 
@@ -207,6 +206,28 @@ class Window(QWidget):
         vbox.addWidget(canvas)
         vbox.addWidget(groupBoxHorizontal)
         self.groupBox.setLayout(vbox)
+
+    def application(self):
+        equation = self.read_fx()
+        l = int(self.read_min())
+        r = int(self.read_max())+1
+        fxerror = "valid"
+        minmaxerror = "valid"
+        if not input_validation(equation):
+            fxerror = "error"
+        if not validate_min_max(l, r):
+            minmaxerror = "error"
+        
+        if fxerror=='error' or minmaxerror=='error':
+            return
+        
+        # arrays to be plotted as x-axis and y-axis
+        self.xdata = np.arange(l, r)
+        self.ydata = np.zeros(r - l)
+        for i in range(l, r):
+            self.ydata[i-l] = F(i, equation)
+        
+        self.update_plot()
 
 # Calling the Program
 myApp = QApplication(sys.argv)
