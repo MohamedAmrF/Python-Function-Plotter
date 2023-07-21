@@ -65,3 +65,6 @@ pytest test_function_plotter.py
 ![Screenshot (662)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/109ec1cd-f9f8-4637-9ede-32d2cee16b81)
 
 ![Screenshot (661)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/bd9e9516-79bb-46fa-9b7b-e46d48a4b7a6)
+
+
+Author: Mohamed Amr
