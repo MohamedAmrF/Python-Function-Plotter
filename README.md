@@ -39,3 +39,29 @@ Automated tests have been provided using `pytest` and `pytest-qt` to cover the m
 
 ```bash
 pytest test_function_plotter.py
+```
+
+## Picture Examples
+
+### Valid Examples
+![Screenshot (654)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/419ad077-1832-4f30-bc32-5da49c584add)
+![Screenshot (655)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/5e7c24b3-c907-4729-ad23-ed738db9d954)
+![Screenshot (656)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/8a24df7c-8dc8-41c0-97bd-ebbf457773be)
+![Screenshot (657)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/17d3eafc-5c43-4557-8e83-b663916920da)
+
+![Screenshot (660)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/1b516ab3-1e2f-48fc-836c-9a8e36c0d9ea)
+
+![Screenshot (659)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/a144160a-697a-4664-bd94-aecaaa8d5a5b)
+
+![Screenshot (658)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/2e3b265d-0647-4174-9af0-12ceda7842ca)
+
+
+## Invalid Examples:
+
+![Screenshot (665)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/5ff23b1d-b038-4091-9eac-88362c04a151)
+![Screenshot (664)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/80c129f0-e9d7-4193-bd1a-cc1a8c9a87cb)
+![Screenshot (663)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/7741fc78-e7f2-484e-ad4f-f8f39b614389)
+
+![Screenshot (662)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/109ec1cd-f9f8-4637-9ede-32d2cee16b81)
+
+![Screenshot (661)](https://github.com/MohamedAmrF/Python-Function-Plotter/assets/78857431/bd9e9516-79bb-46fa-9b7b-e46d48a4b7a6)

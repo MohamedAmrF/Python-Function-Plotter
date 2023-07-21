@@ -29,7 +29,7 @@ def valid_character(c):
     Returns:
         bool: True if valid, False Otherwise
     """
-    validCharacters = "x+-*/^ 0123456789()"
+    validCharacters = "x+-*/^ 0123456789()."
     if validCharacters.find(c) == -1:
         return False
     else:
