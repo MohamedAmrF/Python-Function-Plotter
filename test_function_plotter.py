@@ -16,7 +16,7 @@ from matplotlib.figure import Figure
 
 from helpers.validation import *
 
-# Import the main application code (you might need to change the import path based on your project structure)
+
 from maingui import MainWindow, Window
 
 # Test the GUI elements and their interactions
@@ -104,4 +104,5 @@ def test_valid_input(app):
     assert graph.xdata.tolist() == list(range(1, 11))
     assert graph.ydata.tolist() == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
-# Add more test cases as needed to cover other features and scenarios
+
+
