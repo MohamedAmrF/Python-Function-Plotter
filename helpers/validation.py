@@ -2,6 +2,15 @@ import math
 import ast
 
 def validate_min_max(l, r):
+    """Validate the range of computing the function
+
+    Args:
+        l (int): min range
+        r (int): max range
+
+    Returns:
+        bool: True if valid, False otherwise
+    """
     if r <= l:
         return False
     return True
@@ -12,6 +21,14 @@ def validate(input_equation):
         input_equation = fix_equation(input_equation)
 
 def valid_character(c):
+    """Checks if the input character is valid
+
+    Args:
+        c (character): character to be checked
+
+    Returns:
+        bool: True if valid, False Otherwise
+    """
     validCharacters = "x+-*/^ 0123456789()"
     if validCharacters.find(c) == -1:
         return False
@@ -32,6 +49,14 @@ def input_validation(input_equation):
     return True
 
 def fix_equation(input_equation):
+    """Handles ^ sign and case insensitivity when dealing with x
+
+    Args:
+        input_equation (string): The input string from the user
+
+    Returns:
+        String: The string after replacing ^ with ** and converting X to x
+    """
     input_equation = input_equation.replace("^", "**")
     input_equation = input_equation.replace("X", "x")
     return input_equation

@@ -31,7 +31,6 @@ class MainWindow(QMainWindow):
         self.setGeometry(900,700,900,700)
         self.setIcon()
         self.center()
-        # self.StatusBarError('error', 'error')
 
     def setIcon(self):
         appIcon = QIcon("icon.png")
@@ -55,8 +54,7 @@ class MainWindow(QMainWindow):
             message += "❗ Invalid, Enter Another Equation "
         if minmaxerror == "error":
             message += "❗ Invalid, Max should be greater than Min "
-        QTimer.singleShot(10000, self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:red;font-weight:bold;}")); 
-        # self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:red;font-weight:bold;}")
+        QTimer.singleShot(10000, self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:red;font-weight:bold;}"))
         self.myStatus.showMessage(message, 10000)
 
 class Window(QWidget):
@@ -199,12 +197,27 @@ class Window(QWidget):
 
 
     def read_fx(self):
+        """Read input equation from text box
+
+        Returns:
+            string: input by the user
+        """
         return self.linefx.text()
     
     def read_min(self):
+        """Read min range from text box
+
+        Returns:
+            string: input by the user
+        """
         return self.linemin.text()
 
     def read_max(self):
+        """Read max range from text box
+
+        Returns:
+            string: input by the user
+        """
         return self.linemax.text()
 
     def createLayout(self):
@@ -256,6 +269,8 @@ class Window(QWidget):
 
 
     def application(self):
+        """The main application routine
+        """
         equation = fix_equation(self.read_fx())
         l = int(self.read_min())
         r = int(self.read_max())+1
