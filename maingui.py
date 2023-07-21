@@ -5,7 +5,7 @@ import numpy as np
 import random
 plt.use('Qt5Agg')
 
-from PySide2.QtWidgets import QApplication,QWidget,QLabel,QToolTip,QPushButton,QMessageBox, QDesktopWidget,QMainWindow,QDialog,QHBoxLayout,QVBoxLayout,QGroupBox,QLineEdit
+from PySide2.QtWidgets import QApplication,QWidget,QLabel,QToolTip,QPushButton,QMessageBox, QDesktopWidget,QMainWindow,QDialog,QHBoxLayout,QVBoxLayout,QGroupBox,QLineEdit,QStatusBar
 from PySide2.QtGui import QIcon,QPixmap,QFont
 from PySide2.QtCore import QTimer
 
@@ -22,6 +22,43 @@ class MplCanvas(FigureCanvasQTAgg):
         self.axes = fig.add_subplot(111)
         super(MplCanvas, self).__init__(fig)
 
+class MainWindow(QMainWindow):
+    def __init__(self, win):
+        super().__init__()
+        self.setCentralWidget(win)
+        self.createStatusBar()
+        self.setWindowTitle("Function Plotter")
+        self.setGeometry(900,700,900,700)
+        self.setIcon()
+        self.center()
+        # self.StatusBarError('error', 'error')
+
+    def setIcon(self):
+        appIcon = QIcon("icon.png")
+        self.setWindowIcon(appIcon)
+        
+    def center(self):
+        qRect = self.frameGeometry()
+        centerPoint = QDesktopWidget().availableGeometry().center()
+        qRect.moveCenter(centerPoint)
+        self.move(qRect.topLeft())
+
+    def createStatusBar(self):
+        self.myStatus = QStatusBar()
+        self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:green;font-weight:bold;}")
+        self.myStatus.showMessage("✅ Ready", 5000)
+        self.setStatusBar(self.myStatus)
+    
+    def StatusBarError(self, fxerror, minmaxerror):
+        message = ""
+        if fxerror == "error":
+            message += "❗ Invalid, Enter Another Equation "
+        if minmaxerror == "error":
+            message += "❗ Invalid, Max should be greater than Min "
+        QTimer.singleShot(10000, self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:red;font-weight:bold;}")); 
+        # self.myStatus.setStyleSheet("QStatusBar{padding-left:8px;color:red;font-weight:bold;}")
+        self.myStatus.showMessage(message, 10000)
+
 class Window(QWidget):
     def __init__(self):
         super().__init__()
@@ -30,12 +67,8 @@ class Window(QWidget):
         self.graph = MplCanvas(self, width=5, height=5, dpi=100)
         self.xdata = np.arange(self.min, self.max)
         self.ydata = np.zeros(self.max - self.min)
-        self.nmin = 1
-        self.nmax = 10
-        self.nxdata = np.arange(self.nmin, self.nmax)
-        self.nydata = np.zeros(self.nmax - self.nmin)
         self.setWindowTitle("Function Plotter")
-        self.setGeometry(800,600,800,600)
+        self.setGeometry(1000,800,1000,800)
         self.setIcon()
         self.center()
         self.createLayout()
@@ -207,8 +240,23 @@ class Window(QWidget):
         vbox.addWidget(groupBoxHorizontal)
         self.groupBox.setLayout(vbox)
 
+    def error_response(self, fx, minmax):
+        """The response of the Invalid Input
+        """
+        message = ""
+        if fx == "error":
+            message += "❗ Invalid, Enter Another Equation \n"
+        if minmax == "error":
+            message += "❗ Invalid, Max should be greater than Min "
+        userInfo = QMessageBox.question(self, "❗ Invalid Input", message,
+                                        QMessageBox.Cancel)
+
+        if userInfo == QMessageBox.Cancel:
+                pass
+
+
     def application(self):
-        equation = self.read_fx()
+        equation = fix_equation(self.read_fx())
         l = int(self.read_min())
         r = int(self.read_max())+1
         fxerror = "valid"
@@ -219,6 +267,7 @@ class Window(QWidget):
             minmaxerror = "error"
         
         if fxerror=='error' or minmaxerror=='error':
+            self.error_response(fxerror, minmaxerror)
             return
         
         # arrays to be plotted as x-axis and y-axis
