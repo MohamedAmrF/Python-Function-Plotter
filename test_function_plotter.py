@@ -9,7 +9,7 @@ plt.use('Qt5Agg')
 
 from PySide2.QtWidgets import QApplication,QWidget,QLabel,QToolTip,QPushButton,QMessageBox, QDesktopWidget,QMainWindow,QDialog,QHBoxLayout,QVBoxLayout,QGroupBox,QLineEdit,QStatusBar
 from PySide2.QtGui import QIcon,QPixmap,QFont
-from PySide2.QtCore import QTimer
+from PySide2.QtCore import Qt
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
